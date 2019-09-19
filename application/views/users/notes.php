@@ -16,6 +16,7 @@
                     <th scope="col">Notes</th>
                     <th scope="col">Active</th>
                     <th scope="col">Date Created</th>
+                    <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>

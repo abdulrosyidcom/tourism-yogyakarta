@@ -14,6 +14,11 @@ class Dashboard extends CI_Controller
     {
         $data['title'] = 'Dashboard';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        // num rows
+        $data['users'] = $this->db->get('user')->num_rows();
+        $data['articles'] = $this->db->get('article')->num_rows();
+        $data['offer'] = $this->db->get('offers')->num_rows();
          
         $this->load->view('backend/header', $data);
         $this->load->view('backend/sidebar', $data);
@@ -206,12 +211,53 @@ class Dashboard extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['article'] = $this->db->get_where('article', ['id' => $id])->row_array();
+        $data['categorys'] = $this->db->get('article_category')->result_array();
+
+        $this->form_validation->set_rules('title', 'Judul', 'Required');
+        $this->form_validation->set_rules('content', 'Judul', 'Required');
         
-        $this->load->view('backend/header', $data);
-        $this->load->view('backend/sidebar', $data);
-        $this->load->view('backend/topbar', $data);
-        $this->load->view('dashboard/article/update_article', $data);
-        $this->load->view('backend/footer');
+        if( $this->form_validation->run() == false ) {
+            $this->load->view('backend/header', $data);
+            $this->load->view('backend/sidebar', $data);
+            $this->load->view('backend/topbar', $data);
+            $this->load->view('dashboard/article/update_article', $data);
+            $this->load->view('backend/footer');
+        } else {
+            $data = [
+                "title" => $this->input->post('title'),
+                "url_title" => strtolower( url_title( $this->input->post('title') ) ),
+                "category" => $this->input->post('category'),
+                "content" => $this->input->post('content'),
+                "author" => $data['user']['email'],
+                "date_created" => time(),
+                "is_active" => 'active'
+            ];
+
+            $image = $_FILES['image']['name'];
+
+            if( $image ) {
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size'] = '5000';
+                $config['upload_path'] = './assets/img/article/';
+
+                $this->load->library('upload', $config);
+
+                if( $this->upload->do_upload('image') ) {
+
+                    $new_image = $this->upload->data('file_name');
+                    $this->db->set('image', $new_image);
+
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('article', $data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Artikel Berhasil Diubah!</div>');
+            redirect('dashboard/article');
+        }
     }
 
     public function delete_article($id)
@@ -340,7 +386,188 @@ class Dashboard extends CI_Controller
         }
     }
 
+    
+    public function user_notes()
+    {
+        $data['title'] = 'User Notes';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['userNotes'] = $this->db->get('user_notes')->result_array();
 
+        $this->load->view('backend/header', $data);
+        $this->load->view('backend/sidebar', $data);
+        $this->load->view('backend/topbar', $data);
+        $this->load->view('dashboard/user/user_notes', $data);
+        $this->load->view('backend/footer');
+    }
+    
+    public function update_user_notes($id)
+    {
+        $data['title'] = 'Update User Notes';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['userNote'] = $this->db->get_where('user_notes', ['id' => $id])->row_array();
+
+        $this->form_validation->set_rules('notes', 'Catatan', 'required');
+
+        if( $this->form_validation->run() == false ) {
+            $this->load->view('backend/header', $data);
+            $this->load->view('backend/sidebar', $data);
+            $this->load->view('backend/topbar', $data);
+            $this->load->view('dashboard/user/update_user_notes', $data);
+            $this->load->view('backend/footer');
+        } else {
+
+            $result = [
+                'notes' => $this->input->post('notes'),
+                'is_active' => $this->input->post('is_active')
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_notes', $result);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Catatan Berhasil Diubah!</div>');
+            redirect('dashboard/user_notes');
+        }
+    }
+
+    public function delete_user_notes($id)
+    {
+        return $this->db->delete('user_notes', ['id' => $id]);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Catatan Berhasil Dihapus!</div>');
+        redirect('dashboard/user_notes');
+    }
+
+    public function offers()
+    {
+        $data['title'] = 'Offers';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['offers'] = $this->db->get('offers')->result_array();
+        
+        $this->load->view('backend/header', $data);
+        $this->load->view('backend/sidebar', $data);
+        $this->load->view('backend/topbar', $data);
+        $this->load->view('dashboard/offers/index', $data);
+        $this->load->view('backend/footer');
+    }
+    
+    public function add_offers()
+    {
+        $data['title'] = 'Add Offers';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('title', 'Judul', 'required');
+        $this->form_validation->set_rules('price', 'Harga', 'required');
+        $this->form_validation->set_rules('content', 'Konten', 'required');
+
+        if( $this->form_validation->run() == false ) {
+            $this->load->view('backend/header', $data);
+            $this->load->view('backend/sidebar', $data);
+            $this->load->view('backend/topbar', $data);
+            $this->load->view('dashboard/offers/add_offers', $data);
+            $this->load->view('backend/footer');
+        } else {
+            
+            $data = [
+                'title' => $this->input->post('title'),
+                'url_title' => strtolower(url_title($this->input->post('title'))),
+                'content' => $this->input->post('content'),
+                'author' => $data['user']['email'],
+                'price' => $this->input->post('price'),
+                'is_active' => 'active',
+                'date_created' => time(),
+            ];
+
+            $image = $_FILES['image']['name'];
+
+            if( $image ) {
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size'] = '5000';
+                $config['upload_path'] = './assets/img/offers/';
+
+                $this->load->library('upload', $config);
+
+                if( $this->upload->do_upload('image') ) {
+
+                    $new_image = $this->upload->data('file_name');
+                    $this->db->set('image', $new_image);
+
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+
+            $this->db->insert('offers', $data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Penawaran Baru Berhasil Ditambahkan!</div>');
+            redirect('dashboard/offers');
+        }
+    }
+
+    
+    public function edit_offers($id)
+    {
+        $data['title'] = 'Edit Offers';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['offer'] = $this->db->get_where('offers', ['id' => $id])->row_array();
+
+        $this->form_validation->set_rules('title', 'Judul', 'required');
+        $this->form_validation->set_rules('price', 'Harga', 'required');
+        $this->form_validation->set_rules('content', 'Konten', 'required');
+
+        if( $this->form_validation->run() == false ) {
+            $this->load->view('backend/header', $data);
+            $this->load->view('backend/sidebar', $data);
+            $this->load->view('backend/topbar', $data);
+            $this->load->view('dashboard/offers/edit_offers', $data);
+            $this->load->view('backend/footer');
+        } else {
+            
+            $data = [
+                'title' => $this->input->post('title'),
+                'url_title' => strtolower(url_title($this->input->post('title'))),
+                'content' => $this->input->post('content'),
+                'author' => $data['user']['email'],
+                'price' => $this->input->post('price'),
+                'is_active' => 'active',
+                'date_created' => time(),
+            ];
+
+            $image = $_FILES['image']['name'];
+
+            if( $image ) {
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size'] = '5000';
+                $config['upload_path'] = './assets/img/offers/';
+
+                $this->load->library('upload', $config);
+
+                if( $this->upload->do_upload('image') ) {
+
+                    $new_image = $this->upload->data('file_name');
+                    $this->db->set('image', $new_image);
+
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('offers', $data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Penawaran Berhasil Diubah!</div>');
+            redirect('dashboard/offers');
+        }
+    }
+
+    public function delete_offers($id)
+    {
+        $this->db->delete('offers', ['id' => $id]);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Penawaran Berhasil Dihapus!</div>');
+        redirect('dashboard/offers');
+    }
 
 
 }

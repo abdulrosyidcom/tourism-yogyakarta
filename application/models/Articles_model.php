@@ -8,9 +8,4 @@ class Articles_model extends CI_Model
     {
         return $this->db->get('article', $limit, $start)->result_array();
     }
-
-    public function countAllArticles()
-    {
-        return $this->db->get('article')->row_array();
-    }
 }

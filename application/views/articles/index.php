@@ -53,15 +53,13 @@
 
 					</div>
 						
-					<!-- <div class="blog_navigation">
+					<div class="blog_navigation">
 						<ul>
 							<li class="blog_dot active"><div></div>01.</li>
 							<li class="blog_dot"><div></div>02.</li>
 							<li class="blog_dot"><div></div>03.</li>
 						</ul>
-					</div> -->
-
-					
+					</div>
 
 				</div>
 
@@ -127,7 +125,7 @@
 
 					<!-- Sidebar Latest Posts -->
 
-					<!-- <div class="sidebar_latest_posts">
+					<div class="sidebar_latest_posts">
 						<div class="sidebar_title">Latest Posts</div>
 						<div class="latest_posts_container">
 							<ul>
@@ -155,7 +153,7 @@
 
 							</ul>
 						</div>
-					</div> -->
+					</div>
 
 					<!-- Sidebar Gallery -->
 					<!-- <div class="sidebar_gallery">

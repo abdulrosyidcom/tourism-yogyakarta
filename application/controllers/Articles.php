@@ -10,17 +10,9 @@ class Articles extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         
         $data['categorys'] = $this->db->get('article_category')->result_array();
-
-        $config['base_url'] = 'http://localhost/2019/pariwisata/articles/index';
-        $config['total_rows'] = $this->Articles_model->countAllArticles();
-        $config['per_page'] = 2;
-
-        $this->pagination->initialize($config);
         
+        $data['articles'] = $this->Articles_model->getAllArticles(3, 0);
 
-        $data['articles'] = $this->Articles_model->getAllArticles(2, 0);
-
-        
         $this->load->view('templates/articles_header', $data);
         $this->load->view('templates/navbar', $data);
         $this->load->view('articles/index', $data);
@@ -36,7 +28,7 @@ class Articles extends CI_Controller
 
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         
-        $data['articles'] = $this->db->get('article')->result_array();
+        $data['articles'] = $this->db->get('article', 3, 0)->result_array();
         $data['categorys'] = $this->db->get('article_category')->result_array();
 
         $data['commentars'] = $this->db->get('article_commentar')->result_array();
