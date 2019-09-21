@@ -213,24 +213,22 @@ class Dashboard extends CI_Controller
         $data['article'] = $this->db->get_where('article', ['id' => $id])->row_array();
         $data['categorys'] = $this->db->get('article_category')->result_array();
 
-        $this->form_validation->set_rules('title', 'Judul', 'Required');
-        $this->form_validation->set_rules('content', 'Judul', 'Required');
+        $this->form_validation->set_rules('title', 'Judul', 'required');
+        $this->form_validation->set_rules('content', 'Konten', 'required');
         
-        if( $this->form_validation->run() == false ) {
+        if ($this->form_validation->run() == FALSE) {
             $this->load->view('backend/header', $data);
             $this->load->view('backend/sidebar', $data);
             $this->load->view('backend/topbar', $data);
             $this->load->view('dashboard/article/update_article', $data);
             $this->load->view('backend/footer');
         } else {
+            
             $data = [
-                "title" => $this->input->post('title'),
-                "url_title" => strtolower( url_title( $this->input->post('title') ) ),
-                "category" => $this->input->post('category'),
-                "content" => $this->input->post('content'),
-                "author" => $data['user']['email'],
-                "date_created" => time(),
-                "is_active" => 'active'
+                'title' => $this->input->post('title', true),
+                'url_title' => strtolower( url_title($this->input->post('title', true))),
+                'category' => $this->input->post('category'),
+                'content' => $this->input->post('content', true)
             ];
 
             $image = $_FILES['image']['name'];

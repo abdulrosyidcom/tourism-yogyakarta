@@ -122,17 +122,18 @@
 
 				<!-- Intro Item -->
 
+				<?php foreach ($offers as $offer)  : ?>
 				<div class="col-lg-4 intro_col">
 					<div class="intro_item">
 						<div class="intro_item_overlay"></div>
 						<!-- Image by https://unsplash.com/@dnevozhai -->
-						<div class="intro_item_background" style="background-image:url(<?= base_url('assets/frontend/'); ?>images/intro_1.jpg)"></div>
+						<div class="intro_item_background" style="background-image:url(<?= base_url('assets/img/offers/') . $offer['image']; ?>)"></div>
 						<div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
-							<div class="intro_date">May 25th - June 01st</div>
-							<div class="button intro_button"><div class="button_bcg"></div><a href="#">see more<span></span><span></span><span></span></a></div>
+							<div class="intro_date"><?= date('d M y', $offer['date_created']); ?></div>
+							<div class="button intro_button"><div class="button_bcg"></div><a href="<?= base_url('offers/read/') . $offer['url_title']; ?>">see more<span></span><span></span><span></span></a></div>
 							<div class="intro_center text-center">
-								<h1>Mauritius</h1>
-								<div class="intro_price">From $1450</div>
+								<h1><?= $offer['title']; ?></h1>
+								<div class="intro_price">From <?= $offer['price']; ?></div>
 								<div class="rating rating_4">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
@@ -144,13 +145,11 @@
 						</div>
 					</div>
 				</div>
+				<?php endforeach; ?>
 
-				<!-- Intro Item -->
-
-				<div class="col-lg-4 intro_col">
+				<!-- <div class="col-lg-4 intro_col">
 					<div class="intro_item">
 						<div class="intro_item_overlay"></div>
-						<!-- Image by https://unsplash.com/@hellolightbulb -->
 						<div class="intro_item_background" style="background-image:url(<?= base_url('assets/frontend/'); ?>images/intro_2.jpg)"></div>
 						<div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
 							<div class="intro_date">May 25th - June 01st</div>
@@ -170,12 +169,9 @@
 					</div>
 				</div>
 
-				<!-- Intro Item -->
-
 				<div class="col-lg-4 intro_col">
 					<div class="intro_item">
 						<div class="intro_item_overlay"></div>
-						<!-- Image by https://unsplash.com/@willianjusten -->
 						<div class="intro_item_background" style="background-image:url(<?= base_url('assets/frontend/'); ?>images/intro_3.jpg)"></div>
 						<div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
 							<div class="intro_date">May 25th - June 01st</div>
@@ -193,7 +189,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 		</div>

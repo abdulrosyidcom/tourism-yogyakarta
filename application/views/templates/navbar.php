@@ -49,6 +49,7 @@
 							<ul class="main_nav_list">
 								<li class="main_nav_item"><a href="<?= base_url(); ?>">home</a></li>
 								<li class="main_nav_item"><a href="<?= base_url('articles'); ?>">Articles</a></li>
+								<li class="main_nav_item"><a href="<?= base_url('offers'); ?>">offers</a></li>
 								<li class="main_nav_item"><a href="<?= base_url('contact'); ?>">Contact</a></li>
 								<li class="main_nav_item"><a href="<?= base_url('about'); ?>">About Us</a></li>
 							</ul>
@@ -98,6 +99,7 @@
 			<ul>
 				<li class="menu_item"><a href="<?= base_url(); ?>">home</a></li>
 				<li class="menu_item"><a href="<?= base_url('articles'); ?>">Articles</a></li>
+				<li class="menu_item"><a href="<?= base_url('offers'); ?>">Offers</a></li>
 				<li class="menu_item"><a href="<?= base_url('contact'); ?>">Contact</a></li>
 				<li class="menu_item"><a href="<?= base_url('about'); ?>">About Us</a></li>
 			</ul>
