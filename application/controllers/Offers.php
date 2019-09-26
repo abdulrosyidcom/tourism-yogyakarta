@@ -24,6 +24,8 @@ class offers extends CI_Controller
         $data['offer'] = $this->db->get_where('offers', ['url_title' => $url_title])->row_array();
         $data['title'] = 'Pariwisata Yogyakarta ' . $data['offer']['title'];
 
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        
         $data['articles'] = $this->db->get('article', 4)->result_array();
         $data['categorys'] = $this->db->get('article_category')->result_array();
 

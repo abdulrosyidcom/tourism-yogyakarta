@@ -41,7 +41,7 @@
 								</div> -->
 								<div class="col-lg-8 text-center">
 									<div class="offers_content">
-										<div class="offers_price">Rp. <?= $offer['price']; ?><span>per night</span></div>
+										<div class="offers_price">Paket <?= $offer['package']; ?><span>per night</span></div>
 										<div class="rating_r rating_r_4 offers_rating" data-rating="4">
 											<i></i>
 											<i></i>

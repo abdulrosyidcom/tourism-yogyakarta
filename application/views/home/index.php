@@ -15,8 +15,8 @@
 
 					<div class="home_slider_content text-center">
 						<div class="home_slider_content_inner" data-animation-in="flipInX" data-animation-out="animate-out fadeOut">
-							<h1>discover</h1>
-							<h1>the world</h1>
+							<h1>Yogyakarta</h1>
+							<h1>Hellow world</h1>
 							<div class="button home_slider_button"><div class="button_bcg"></div><a href="#">explore now<span></span><span></span><span></span></a></div>
 						</div>
 					</div>
@@ -28,8 +28,8 @@
 
 					<div class="home_slider_content text-center">
 						<div class="home_slider_content_inner" data-animation-in="flipInX" data-animation-out="animate-out fadeOut">
-							<h1>discover</h1>
-							<h1>the world</h1>
+							<h1>Yogyakata</h1>
+							<h1>Hellow world</h1>
 							<div class="button home_slider_button"><div class="button_bcg"></div><a href="#">explore now<span></span><span></span><span></span></a></div>
 						</div>
 					</div>
@@ -101,7 +101,6 @@
 	</div>
 
 	
-
 	<!-- Intro -->
 	
 	<div class="intro">
@@ -133,7 +132,7 @@
 							<div class="button intro_button"><div class="button_bcg"></div><a href="<?= base_url('offers/read/') . $offer['url_title']; ?>">see more<span></span><span></span><span></span></a></div>
 							<div class="intro_center text-center">
 								<h1><?= $offer['title']; ?></h1>
-								<div class="intro_price">From <?= $offer['price']; ?></div>
+								<!-- <div class="intro_price">From <?= $offer['price']; ?></div> -->
 								<div class="rating rating_4">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>

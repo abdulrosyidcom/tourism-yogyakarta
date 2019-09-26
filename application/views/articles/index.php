@@ -52,14 +52,24 @@
 						<?php endforeach; ?>
 
 					</div>
+
+					<br><br>
+
+					<?= $this->pagination->create_links(); ?>
 						
-					<div class="blog_navigation">
+					<!-- <div class="blog_navigation">
 						<ul>
-							<li class="blog_dot active"><div></div>01.</li>
-							<li class="blog_dot"><div></div>02.</li>
-							<li class="blog_dot"><div></div>03.</li>
+							<li class="blog_dot active">
+								<div></div>01.
+							</li>
+							<li class="blog_dot">
+								<div></div>02.
+							</li>
+							<li class="blog_dot">
+								<div></div>03.
+							</li>
 						</ul>
-					</div>
+					</div> -->
 
 				</div>
 

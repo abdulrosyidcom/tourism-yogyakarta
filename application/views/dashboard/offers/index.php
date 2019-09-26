@@ -17,7 +17,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
-                <th scope="col">Price</th>
+                <th scope="col">Package</th>
                 <th scope="col">Active</th>
                 <th scope="col">Date Created</th>
                 <th scope="col">Action</th>
@@ -30,7 +30,7 @@
                   <th scope="row"><?= $no++; ?></th>
                   <td><?= $offer['title']; ?></td>
                   <td><?= $offer['author']; ?></td>
-                  <td>Rp. <?= $offer['price']; ?></td>
+                  <td>Paket : <?= $offer['package']; ?></td>
                   <td>
                     <?php if ($offer['is_active'] == 'active') : ?>
                       <span class="badge badge-success">

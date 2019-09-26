@@ -24,27 +24,28 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $no = 1; ?>
                     <?php foreach ( $userNotes as $us ) : ?>
                         <tr>
-                            <th scope="row">1</th>
+                            <th scope="row"><?= $no++; ?></th>
                             <td><?= $us['name']; ?></td>
                             <td>
                                 <img width="50" src="<?= base_url('assets/img/profile/') . $us['image']; ?>" alt="">
                             </td>
-                            <td><?= $us['notes']; ?></td>
+                            <td><?= substr($us['notes'], 0, 30); ?></td>
 
                             <td>
                                 <?php if ( $us['is_active'] == 'active' ) : ?>
                                     <span class="badge badge-success"><?= $us['is_active']; ?></span>
                                 <?php else: ?>
-                                    <span class="badge badge-danger"><?= $us['is_active']; ?></span>
+                                    <span class="badge badge-warning"><?= $us['is_active']; ?></span>
                                 <?php endif; ?>
                             </td>
 
                             <td><?= date('d M y', $us['date_created']); ?></td>
                             <td>
                                 <a href="<?= base_url('dashboard/update_user_notes/') . $us['id']; ?>" class="badge badge-info">Update</a>
-                                <a href="<?= base_url('dashboard/delete_user_notes/') . $us['id']; ?>" class="badge badge-danger">Delete</a>
+                                <a href="<?= base_url('dashboard/delete_user_notes/') . $us['id']; ?>" onclick="return confirm('yakin dihapus?');" class="badge badge-danger">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

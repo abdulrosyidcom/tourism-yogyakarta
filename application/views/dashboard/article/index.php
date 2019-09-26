@@ -38,7 +38,7 @@
                   <?php endif; ?>
 
                   <td>
-                    <a href="<?= base_url(); ?>dashboard/update_article/<?= $article['id']; ?>" class="badge badge-primary">update</a>
+                    <a href="<?= base_url(); ?>dashboard/update_article/<?= $article['url_title']; ?>" class="badge badge-primary">update</a>
                     <a href="<?php base_url(); ?>delete_article/<?= $article['id']; ?>" onclick="return confirm('yakin dihapus?');" class="badge badge-danger">delete</a>
                   </td>
                 </tr>

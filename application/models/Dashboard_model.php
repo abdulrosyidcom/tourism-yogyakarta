@@ -45,5 +45,13 @@ class Dashboard_model extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
+    // public function editBerita($id, $data) {
+	// 	$this->db->where('id', $id_post);
+	// 	$this->db->update('article', $data);
+	// 	if($this->db->affected_rows() > 0)
+	// 		return true;
+	// 	else
+	// 		return false;
+	// }
 
 }

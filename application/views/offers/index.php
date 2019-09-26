@@ -35,13 +35,14 @@
 								</div>
 								<div class="col-lg-8">
 									<div class="offers_content">
-										<div class="offers_price">Rp. <?= $offer['price']; ?><span>per night</span></div>
+										<div class="offers_price"><?= date('d',$offer['date_created']); ?><span><?= date('M Y',$offer['date_created']); ?></span></div>
 										<div class="rating_r rating_r_4 offers_rating" data-rating="4">
+											<!-- <i></i>
 											<i></i>
 											<i></i>
 											<i></i>
-											<i></i>
-											<i></i>
+											<i></i> -->
+											<p>Paket : <?= $offer['package']; ?></p>
 										</div>
 										<p class="offers_text"><?= substr($offer['content'], 0, 250); ?></p>
 										<div class="offers_icons">

@@ -30,10 +30,10 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="price" class="col-sm-2 col-form-label">Price</label>
+                    <label for="package" class="col-sm-2 col-form-label">Package</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-lg" id="price" placeholder="price" name="price" value="<?= $offer['price']; ?>">
-                        <?= form_error('price', '<small class="text-danger">', '</small>'); ?>
+                        <input type="text" class="form-control form-control-lg" id="package" placeholder="package" name="package" value="<?= $offer['package']; ?>">
+                        <?= form_error('package', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 

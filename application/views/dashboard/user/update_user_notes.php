@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-body">
                     <form action="" method="post">
-                        <input type="hidden" id="id" value="<?= $userNote['id']; ?>">
+                        <input type="hidden" name="id" value="<?= $userNote['id']; ?>">
                         <div class="form-group">
                             <label for="notes">User Notes</label>
                             <textarea class="form-control" id="notes" rows="3" name="notes"><?= $userNote['notes']; ?></textarea>
